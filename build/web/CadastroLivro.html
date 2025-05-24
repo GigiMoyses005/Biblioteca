@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cadastro de Livro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            :root {
+                --azul-escuro: #2C3E50;
+                --azul-claro: #3498DB;
+                --cinza-claro: #ECF0F1;
+                --cinza-medio: #95A5A6;
+                --branco: #FFFFFF;
+            }
+
+            h1{
+                text-align: center;
+                margin-bottom: 20px;
+                font-size: 28px;
+                color:#2C3E50;
+                border-bottom: 2px solid #3498DB;
+                padding-bottom: 10px;
+                margin-left: 20px;
+            }
+
+            body {
+                background-color: var(--branco);
+                color: var(--azul-escuro);
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+
+            .form {
+                background-color: var(--cinza-claro);
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .form form {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .form label {
+                margin-top: 15px;
+                font-weight: bold;
+            }
+
+            .form input[type="text"],
+            .form input[type="date"],
+            .form select {
+                padding: 8px;
+                margin-top: 5px;
+                border: 1px solid var(--cinza-medio);
+                border-radius: 5px;
+                background-color: var(--branco);
+            }
+
+            .form input[type="submit"] {
+                margin-top: 20px;
+                background-color: var(--azul-claro);
+                color: var(--branco);
+                border: none;
+                padding: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .form input[type="submit"]:hover {
+                background-color: var(--azul-escuro);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="form">
+            <h1>Cadastro de Livros</h1>
+            <form action="CadastroLivro" method="post">
+                <label>Título do Livro</label>
+                <input type="text" name="livro">
+
+                <label>Nome do Autor</label>
+                <input type="text" name="autor">
+
+                <label>Ano de Lançamento</label>
+                <input type="date" name="ano">
+
+                <label for="genero">Gênero do livro:</label>
+                <select id="genero" name="genero">
+   
+                    <option value="romance">Romance</option>
+                    <option value="aventura">Aventura</option>
+                    <option value="fantasia">Fantasia</option>
+                    <option value="ficcao-cientifica">Ficção Científica</option>
+                    <option value="terror">Terror</option>
+                    <option value="suspense">Suspense</option>
+                    <option value="misterio">Mistério</option>
+                    <option value="realismo-magico">Realismo Mágico</option>
+                    <option value="jovem-adulto">Jovem Adulto (JA)</option>
+                    <option value="infantil">Infantil</option>
+                    <option value="biografia">Biografia</option>
+                    <option value="autobiografia">Autobiografia</option>
+                    <option value="autoajuda">Autoajuda</option>
+                    <option value="negocios">Negócios</option>
+                    <option value="financas">Finanças</option>
+                    <option value="historia">História</option>
+                    <option value="ciencia">Ciência</option>
+                    <option value="filosofia">Filosofia</option>
+                    <option value="religiao">Religião</option>
+                    <option value="espiritualidade">Espiritualidade</option>
+                    <option value="humor">Humor</option>
+                    
+                </select>
+
+                <input type="submit" value="Cadastrar">
+            </form>
+        </div>
+    </body>
+</html>
