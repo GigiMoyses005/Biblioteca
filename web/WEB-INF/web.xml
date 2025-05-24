@@ -11,7 +11,7 @@
     </session-config>
    
     <welcome-file-list>
-        <welcome-file>CadastroPessoa.html</welcome-file>
+        <welcome-file>Home.html</welcome-file>
         <!-- ou: <welcome-file>index.jsp</welcome-file> -->
     </welcome-file-list>
 
