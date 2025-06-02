@@ -24,8 +24,8 @@
             }
 
             body {
-                background-color: var(--branco);
-                color: var(--azul-escuro);
+                background-color: #FFFFFF;
+                color: #2C3E50;
                 font-family: Arial, sans-serif;
                 margin: 0;
                 padding: 0;
@@ -36,7 +36,7 @@
             }
 
             .form {
-                background-color: var(--cinza-claro);
+                background-color: #ECF0F1;
                 padding: 30px;
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -59,15 +59,15 @@
             .form select {
                 padding: 8px;
                 margin-top: 5px;
-                border: 1px solid var(--cinza-medio);
+                border: 1px solid  #95A5A6;
                 border-radius: 5px;
-                background-color: var(--branco);
+                background-color:#FFFFFF;
             }
 
             .form input[type="submit"] {
                 margin-top: 20px;
-                background-color: var(--azul-claro);
-                color: var(--branco);
+                background-color: #3498DB;
+                color: #FFFFFF;
                 border: none;
                 padding: 10px;
                 border-radius: 5px;
@@ -76,14 +76,15 @@
             }
 
             .form input[type="submit"]:hover {
-                background-color: var(--azul-escuro);
+                background-color: ;
             }
         </style>
     </head>
     <body>
         <div class="form">
             <h1>Cadastro de Livros</h1>
-            <form action="CadastroLivro" method="post">
+            <form action="CadastroLivro" method="post" enctype="multipart/form-data">
+
                 <label>Título do Livro</label>
                 <input type="text" name="livro">
 
@@ -119,6 +120,9 @@
                     <option value="humor">Humor</option>
                     
                 </select>
+                
+                 <label>Capa do Livro</label>
+                 <input type="file" name="imagem" accept="image/*" required>
 
                 <input type="submit" value="Cadastrar">
             </form>

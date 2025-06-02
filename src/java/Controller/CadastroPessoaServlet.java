@@ -29,6 +29,7 @@ public class CadastroPessoaServlet extends HttpServlet {
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
             out.println("<h2>Pessoa cadastrada com sucesso!</h2>");
+            out.println("<a href='Home.html'>Voltar</a>");
         } catch (Exception e) {
             throw new ServletException("Erro ao cadastrar pessoa", e);
         }
