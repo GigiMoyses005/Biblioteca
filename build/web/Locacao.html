@@ -3,13 +3,114 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
 -->
-<html>
+<html lang="pt-br">
     <head>
-        <title>TODO supply a title</title>
         <meta charset="UTF-8">
+        <title>Locação de Livro</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            :root {
+                --azul-escuro: #2C3E50;
+                --azul-claro: #3498DB;
+                --cinza-claro: #ECF0F1;
+                --cinza-medio: #95A5A6;
+                --branco: #FFFFFF;
+            }
+            body {
+                background-color: var(--branco);
+                color: var(--azul-escuro);
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+            .form {
+                background-color: var(--cinza-claro);
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
+            }
+            .form h1 {
+                text-align: center;
+                margin-bottom: 20px;
+                font-size: 28px;
+                color: var(--azul-escuro);
+                border-bottom: 2px solid var(--azul-claro);
+                padding-bottom: 10px;
+            }
+            .form label {
+                margin-top: 15px;
+                font-weight: bold;
+                display: block;
+            }
+            .form input[type="text"],
+            .form input[type="date"] {
+                padding: 8px;
+                margin-top: 5px;
+                border: 1px solid var(--cinza-medio);
+                border-radius: 5px;
+                background-color: var(--branco);
+                width: 100%;
+            }
+            .form input[type="submit"] {
+                margin-top: 20px;
+                background-color: var(--azul-claro);
+                color: var(--branco);
+                border: none;
+                padding: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                width: 100%;
+                font-size: 16px;
+                transition: background-color 0.3s;
+            }
+            .form input[type="submit"]:hover {
+                background-color: var(--azul-escuro);
+            }
+            .form .livro-titulo {
+                margin-top: 10px;
+                margin-bottom: 20px;
+                font-size: 18px;
+                color: var(--azul-claro);
+                text-align: center;
+            }
+        </style>
+        <script>
+            // Função para obter parâmetros da URL
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+            // Exibe o nome do livro se passado na URL
+            window.onload = function() {
+                const nome = getQueryParam('nome');
+                if (nome) {
+                    const nomeDecodificado = decodeURIComponent(nome.replace(/\+/g, ' '));
+                    document.getElementById('livroNome').value = nomeDecodificado;
+                    document.getElementById('livroTitulo').innerText = 'Livro: ' + nomeDecodificado;
+                }
+            }
+        </script>
     </head>
     <body>
-        <div>TODO write content</div>
+        <div class="form">
+            <h1>Locação de Livro</h1>
+            <div class="livro-titulo" id="livroTitulo">Selecione um livro</div>
+            <form action="#" method="post">
+                <input type="hidden" name="nome" id="livroNome">
+                <label for="nome">Nome do Locatário</label>
+                <input type="text" name="nome" id="nome" required>
+                <label for="dataInicio">Data de Início</label>
+                <input type="date" name="dataInicio" id="dataInicio" required>
+                <label for="dataFim">Data de Devolução</label>
+                <input type="date" name="dataFim" id="dataFim" required>
+                <input type="submit" value="Confirmar Locação">
+            </form>
+        </div>
     </body>
 </html>
