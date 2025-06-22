@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste de Imagens</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .teste-imagem {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .imagem-teste {
+            max-width: 200px;
+            height: auto;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .sucesso {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .erro {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .comando {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Teste de Imagens - Sistema de Biblioteca</h1>
+        
+        <div class="status info">
+            <strong>Instruções:</strong> Esta página testa se as imagens estão sendo carregadas corretamente após o "Clean and Build".
+        </div>
+
+        <h2>1. Teste da Imagem Padrão</h2>
+        <div class="teste-imagem">
+            <h3>Logo Bookfy (imagem padrão do projeto)</h3>
+            <img src="imagens/logo_bookfy.png" alt="Logo Bookfy" class="imagem-teste" 
+                 onload="this.nextElementSibling.innerHTML='✅ Imagem carregada com sucesso!'" 
+                 onerror="this.nextElementSibling.innerHTML='❌ Erro ao carregar imagem!'">
+            <div class="status sucesso">Carregando...</div>
+            <p><strong>Caminho:</strong> imagens/logo_bookfy.png</p>
+        </div>
+
+        <h2>2. Verificação de Estrutura</h2>
+        <div class="status info">
+            <strong>Estrutura esperada:</strong>
+            <ul>
+                <li>Pasta: <code>web/imagens/</code></li>
+                <li>Arquivo: <code>logo_bookfy.png</code> (deve existir)</li>
+                <li>Imagens dos livros devem estar na mesma pasta</li>
+            </ul>
+        </div>
+
+        <h2>3. Comandos para Verificar</h2>
+        <div class="comando">
+            <strong>Verificar se a pasta existe:</strong><br>
+            ls web/imagens/
+        </div>
+        
+        <div class="comando">
+            <strong>Verificar dados no banco:</strong><br>
+            SELECT id, titulo, imagem FROM livro WHERE imagem IS NOT NULL;
+        </div>
+
+        <div class="comando">
+            <strong>Verificar logs do servidor:</strong><br>
+            - Abra o console do NetBeans<br>
+            - Procure por mensagens sobre imagens<br>
+            - Verifique se há erros de codificação
+        </div>
+
+        <h2>4. Possíveis Soluções</h2>
+        <div class="status info">
+            <strong>Se as imagens não aparecem:</strong>
+            <ol>
+                <li>Verifique se os arquivos estão na pasta <code>web/imagens/</code></li>
+                <li>Execute o script <code>verificar_imagens.sql</code> no MySQL</li>
+                <li>Verifique se a string de conexão usa UTF-8</li>
+                <li>Reinicie o servidor Tomcat</li>
+                <li>Verifique os logs do console</li>
+            </ol>
+        </div>
+
+        <h2>5. Teste Manual de URL</h2>
+        <div class="teste-imagem">
+            <p><strong>Teste acessando diretamente:</strong></p>
+            <a href="imagens/logo_bookfy.png" target="_blank">Abrir logo_bookfy.png em nova aba</a>
+            <br><br>
+            <p><strong>Se o link acima não funcionar:</strong></p>
+            <ul>
+                <li>A pasta de imagens pode não estar sendo servida corretamente</li>
+                <li>Verifique as configurações do servidor</li>
+                <li>Certifique-se de que o projeto foi deployado corretamente</li>
+            </ul>
+        </div>
+
+        <div class="status sucesso">
+            <strong>✅ Se a imagem do logo aparece acima:</strong> O servidor está servindo imagens corretamente.<br>
+            <strong>❌ Se a imagem não aparece:</strong> Há um problema com a configuração do servidor ou estrutura de pastas.
+        </div>
+    </div>
+
+    <script>
+        // Script para testar carregamento de imagens
+        console.log("=== TESTE DE IMAGENS ===");
+        
+        // Teste da imagem do logo
+        const logoImg = document.querySelector('img[src="imagens/logo_bookfy.png"]');
+        if (logoImg) {
+            logoImg.addEventListener('load', function() {
+                console.log("✅ Logo carregada com sucesso");
+            });
+            
+            logoImg.addEventListener('error', function() {
+                console.log("❌ Erro ao carregar logo");
+                console.log("Verifique se o arquivo existe em: web/imagens/logo_bookfy.png");
+            });
+        }
+        
+        console.log("=== FIM DO TESTE ===");
+    </script>
+</body>
+</html> 

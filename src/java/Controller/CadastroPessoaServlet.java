@@ -1,7 +1,7 @@
 package Controller;
 
-import model.Pessoa;
-import model.PessoaDAO;
+import Model.Pessoa;
+import Model.PessoaDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +13,12 @@ import java.io.PrintWriter;
 public class CadastroPessoaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // Configurar codificação UTF-8
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        
         Pessoa pessoa = new Pessoa();
         pessoa.setNome(request.getParameter("nome"));
         pessoa.setDataNascimento(request.getParameter("ano"));
@@ -26,7 +32,7 @@ public class CadastroPessoaServlet extends HttpServlet {
             PessoaDAO dao = new PessoaDAO();
             dao.cadastrarPessoa(pessoa);
 
-            response.setContentType("text/html");
+            response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<h2>Pessoa cadastrada com sucesso!</h2>");
             out.println("<a href='Home.html'>Voltar</a>");

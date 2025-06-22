@@ -4,9 +4,17 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/silgs/Favorites/Documents/NetBeansProjects/WebApplication2/src/java/Model/LivroDAO.java</file>
+            <file>file:/C:/Users/silgs/Favorites/Documents/NetBeansProjects/WebApplication2/web/CadastroLivro.html</file>
             <file>file:/C:/Users/silgs/Favorites/Documents/NetBeansProjects/WebApplication2/src/java/Model/catalogoDAO.java</file>
             <file>file:/C:/Users/silgs/Favorites/Documents/NetBeansProjects/WebApplication2/src/java/Controller/CadastroLivroServlet.java</file>
+            <file>file:/C:/Users/silgs/Favorites/Documents/NetBeansProjects/WebApplication2/src/java/Model/PessoaDAO.java</file>
+            <file>file:/C:/Users/silgs/Favorites/Documents/NetBeansProjects/WebApplication2/src/java/Controller/RemoverLivroServlet.java</file>
+            <file>file:/C:/Users/silgs/Favorites/Documents/NetBeansProjects/WebApplication2/src/java/Controller/LoginServlet.java</file>
+            <file>file:/C:/Users/silgs/Favorites/Documents/NetBeansProjects/WebApplication2/src/java/Controller/CadastroPessoaServlet.java</file>
+            <file>file:/C:/Users/silgs/Favorites/Documents/NetBeansProjects/WebApplication2/src/java/Controller/AtualizarLivroServlet.java</file>
+            <file>file:/C:/Users/silgs/Favorites/Documents/NetBeansProjects/WebApplication2/web/listarLivros.jsp</file>
             <file>file:/C:/Users/silgs/Favorites/Documents/NetBeansProjects/WebApplication2/src/java/Controller/catalogoServlet.java</file>
+            <file>file:/C:/Users/silgs/Favorites/Documents/NetBeansProjects/WebApplication2/web/Home.html</file>
         </group>
     </open-files>
 </project-private>

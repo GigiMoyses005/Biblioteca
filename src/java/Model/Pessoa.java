@@ -1,6 +1,7 @@
-package model;
+package Model;
 
 public class Pessoa {
+    private int id;
     private String nome;
     private String dataNascimento;
     private String endereco;
@@ -9,7 +10,24 @@ public class Pessoa {
     private String email;
     private String senha;
 
+    // Construtor padrão
+    public Pessoa() {}
+
+    // Construtor com parâmetros
+    public Pessoa(String nome, String dataNascimento, String endereco, String genero, String telefone, String email, String senha) {
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+        this.genero = genero;
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+    }
+
     // Getters e setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
 

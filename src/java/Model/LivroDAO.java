@@ -3,9 +3,10 @@ package Model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class LivroDAO {
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/biblioteca";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/biblioteca?useUnicode=true&characterEncoding=UTF-8&useSSL=false";
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASS = "";
 
@@ -35,5 +36,55 @@ public class LivroDAO {
         stmt.close();
         conn.close();
         System.out.println("Conexão fechada");
+    }
+
+    public Livro buscarPorId(int id) throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
+
+        String sql = "SELECT * FROM livro WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, id);
+
+        ResultSet rs = stmt.executeQuery();
+        Livro livro = null;
+        if (rs.next()) {
+            livro = new Livro();
+            livro.setId(rs.getInt("id"));
+            livro.setTitulo(rs.getString("titulo"));
+            livro.setAutor(rs.getString("autor"));
+            livro.setAno(rs.getString("ano"));
+            livro.setGenero(rs.getString("genero"));
+            livro.setImagem(rs.getString("imagem"));
+        }
+        rs.close();
+        stmt.close();
+        conn.close();
+        return livro;
+    }
+
+    public Livro buscarPorTitulo(String titulo) throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
+
+        String sql = "SELECT * FROM livro WHERE titulo = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, titulo);
+
+        ResultSet rs = stmt.executeQuery();
+        Livro livro = null;
+        if (rs.next()) {
+            livro = new Livro();
+            livro.setId(rs.getInt("id"));
+            livro.setTitulo(rs.getString("titulo"));
+            livro.setAutor(rs.getString("autor"));
+            livro.setAno(rs.getString("ano"));
+            livro.setGenero(rs.getString("genero"));
+            livro.setImagem(rs.getString("imagem"));
+        }
+        rs.close();
+        stmt.close();
+        conn.close();
+        return livro;
     }
 }

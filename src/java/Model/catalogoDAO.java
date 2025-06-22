@@ -10,7 +10,7 @@ import java.util.List;
 
 public class catalogoDAO {
 
-    private final String url = "jdbc:mysql://localhost:3306/biblioteca";
+    private final String url = "jdbc:mysql://localhost:3306/biblioteca?useUnicode=true&characterEncoding=UTF-8&useSSL=false";
     private final String user = "root";
     private final String password = "";
 
@@ -43,6 +43,30 @@ public class catalogoDAO {
         }
     }
 
+    // CREATE - Adicionar novo livro
+    public boolean adicionarLivro(LivroDTO livro) {
+        String sql = "INSERT INTO livro (titulo, autor, ano, genero, imagem) VALUES (?, ?, ?, ?, ?)";
+        
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, livro.titulo);
+            stmt.setString(2, livro.autor);
+            stmt.setString(3, livro.ano);
+            stmt.setString(4, livro.genero);
+            stmt.setString(5, livro.imagem);
+            
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao adicionar livro: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // READ - Listar todos os livros (já existente)
     public List<LivroDTO> listarLivros() {
         List<LivroDTO> lista = new ArrayList<>();
         String sql = "SELECT id, titulo, autor, ano, genero, imagem FROM livro";
@@ -91,5 +115,169 @@ public class catalogoDAO {
             e.printStackTrace();
         }
         return lista;
+    }
+
+    // READ - Buscar livro por ID
+    public LivroDTO buscarLivroPorId(int id) {
+        String sql = "SELECT id, titulo, autor, ano, genero, imagem FROM livro WHERE id = ?";
+        
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                java.sql.Date dataAno = rs.getDate("ano");
+                String anoFormatado = dataAno != null ? dataAno.toString() : "N/A";
+                String imagemNome = rs.getString("imagem");
+                String caminhoImagem = (imagemNome != null && !imagemNome.trim().isEmpty()) ? 
+                                     "imagens/" + imagemNome : null;
+                
+                return new LivroDTO(
+                    rs.getInt("id"),
+                    rs.getString("titulo"),
+                    rs.getString("autor"),
+                    anoFormatado,
+                    rs.getString("genero"),
+                    caminhoImagem
+                );
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar livro: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // UPDATE - Atualizar livro
+    public boolean atualizarLivro(LivroDTO livro) {
+        String sql = "UPDATE livro SET titulo = ?, autor = ?, ano = ?, genero = ?, imagem = ? WHERE id = ?";
+        
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, livro.titulo);
+            stmt.setString(2, livro.autor);
+            stmt.setString(3, livro.ano);
+            stmt.setString(4, livro.genero);
+            stmt.setString(5, livro.imagem);
+            stmt.setInt(6, livro.id);
+            
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar livro: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // DELETE - Remover livro
+    public boolean removerLivro(int id) {
+        String sql = "DELETE FROM livro WHERE id = ?";
+        
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao remover livro: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Método adicional para buscar livros por título
+    public List<LivroDTO> buscarLivrosPorTitulo(String titulo) {
+        List<LivroDTO> lista = new ArrayList<>();
+        String sql = "SELECT id, titulo, autor, ano, genero, imagem FROM livro WHERE titulo LIKE ?";
+        
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, "%" + titulo + "%");
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                java.sql.Date dataAno = rs.getDate("ano");
+                String anoFormatado = dataAno != null ? dataAno.toString() : "N/A";
+                String imagemNome = rs.getString("imagem");
+                String caminhoImagem = (imagemNome != null && !imagemNome.trim().isEmpty()) ? 
+                                     "imagens/" + imagemNome : null;
+                
+                LivroDTO livro = new LivroDTO(
+                    rs.getInt("id"),
+                    rs.getString("titulo"),
+                    rs.getString("autor"),
+                    anoFormatado,
+                    rs.getString("genero"),
+                    caminhoImagem
+                );
+                lista.add(livro);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar livros por título: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    // READ - Buscar livro por título
+    public LivroDTO buscarLivroPorTitulo(String titulo) {
+        String sql = "SELECT id, titulo, autor, ano, genero, imagem FROM livro WHERE titulo = ?";
+        
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, titulo);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                java.sql.Date dataAno = rs.getDate("ano");
+                String anoFormatado = dataAno != null ? dataAno.toString() : "N/A";
+                String imagemNome = rs.getString("imagem");
+                String caminhoImagem = (imagemNome != null && !imagemNome.trim().isEmpty()) ? 
+                                     "imagens/" + imagemNome : null;
+                
+                return new LivroDTO(
+                    rs.getInt("id"),
+                    rs.getString("titulo"),
+                    rs.getString("autor"),
+                    anoFormatado,
+                    rs.getString("genero"),
+                    caminhoImagem
+                );
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar livro por título: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // DELETE - Remover livro por título
+    public boolean removerLivroPorTitulo(String titulo) {
+        String sql = "DELETE FROM livro WHERE titulo = ?";
+        
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, titulo);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao remover livro: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
     }
 }
