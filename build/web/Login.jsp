@@ -77,6 +77,36 @@
             .form input[type="submit"]:hover {
                 background-color: var(--azul-escuro);
             }
+
+            .form-buttons {
+                display: flex;
+                gap: 10px;
+                margin-top: 20px;
+                justify-content: center;
+            }
+            .btn-igual {
+                width: 120px;
+                height: 40px;
+                background-color: var(--azul-claro);
+                color: var(--branco);
+                border: none;
+                border-radius: 5px;
+                text-align: center;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                font-size: 16px;
+                font-family: inherit;
+                font-weight: 400;
+                transition: background-color 0.3s;
+                box-sizing: border-box;
+                padding: 0;
+            }
+            .btn-igual:hover {
+                background-color: var(--azul-escuro);
+            }
         </style>
     </head>
     <body>
@@ -89,13 +119,16 @@
                 </div>
             <% } %>
 
-            <form action="LoginPessoa" method="post">
+            <form action="LoginPessoa" method="post" style="display: flex; flex-direction: column; gap: 0;">
                 <label>E-mail:</label>
                 <input type="email" name="email">
                 <label>Senha:</label>
                 <input type="password" name="senha" required>
 
-                <input type="submit" value="Entrar">
+                <div class="form-buttons">
+                    <button type="submit" class="btn-igual">Entrar</button>
+                    <a href="CadastroPessoa.html" class="btn-igual">Cadastrar</a>
+                </div>
             </form>
         </div>
     </body>
